@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinematic Birthday</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #0f0f1a, #000);
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  color: white;
+}
+
+/* ⭐ STARS */
+.stars { position: absolute; width: 100%; height: 100%; }
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  animation: twinkle 2s infinite alternate;
+}
+@keyframes twinkle { from {opacity:0.2;} to {opacity:1;} }
+
+/* 💌 CARD */
+.card {
+  text-align: center;
+  padding: 35px;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 60px rgba(255,105,180,0.5);
+  animation: fadeIn 2s ease;
+  max-width: 520px;
+  position: relative;
+}
+@keyframes fadeIn { from {opacity:0; transform:scale(0.8);} to {opacity:1; transform:scale(1);} }
+
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: #ff9bd2;
+}
+
+.photo {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ff9bd2;
+  box-shadow: 0 0 40px #ff9bd2;
+  margin: -12px 0 15px 0;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.photo:hover { transform: scale(1.08); }
+
+.message {
+  font-size: 1.1rem;
+  min-height: 60px;
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 14px 35px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(45deg, #ff4e9b, #ff9bd2);
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #ff9bd2;
+}
+
+.countdown {
+  margin-top: 18px;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  background: linear-gradient(45deg, #ff9bd2, #ffffff, #ff4e9b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255,155,210,0.6);
+  animation: glowPulse 2s infinite alternate;
+}
+
+@keyframes glowPulse {
+  from { text-shadow: 0 0 10px #ff9bd2; }
+  to { text-shadow: 0 0 25px #ff4e9b; }
+}
+
+/* 💖 FLOATING HEARTS */
+.heart {
+  position: absolute;
+  color: pink;
+  font-size: 20px;
+  animation: floatUp 4s linear forwards;
+}
+@keyframes floatUp {
+  from { transform: translateY(0); opacity:1; }
+  to { transform: translateY(-120vh); opacity:0; }
+}
+
+/* 🎆 SURPRISE SCREEN */
+.surprise-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #ff4e9b, #1a1a2e);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.8s ease;
+  z-index: 999;
+}
+.surprise-screen h1 {
+  font-size: 3rem;
+  animation: glow 1.5s infinite alternate;
+}
+@keyframes glow {
+  from { text-shadow: 0 0 10px #fff; }
+  to { text-shadow: 0 0 25px #ffccff; }
+}
+
+/* Side Photos */
+
+.side-photo {
+
+  position: absolute;
+
+  width: 160px;
+
+  height: 160px;              /* Prevent distortion */
+
+  object-fit: cover;
+
+  border-radius: 18px;
+
+  opacity: 0.9;              /* Slightly visible but not faded */
+
+  transform: rotate(-5deg);
+
+  box-shadow: 0 0 25px rgba(255,105,180,0.5);
+
+  transition: 0.4s ease;
+
+}
+
+
+
+.side-photo:hover {
+
+  transform: scale(1.1) rotate(0deg);
+
+  opacity: 1;
+
+}
+
+@media screen and (orientation: portrait) {
+  body {
+    transform: rotate(90deg);
+    transform-origin: center center;
+    width: 100vh;
+    height: 100vw;
+    overflow-x: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+
+#typed {
+    font-family: 'Great Vibes', cursive;   /* same as countdown */
+    font-size: 28px;
+    color: #ff66b2;
+    text-align: center;
+    line-height: 1.6;
+   background: linear-gradient(
+    90deg,
+    #ffffff,
+    #ffe6fa,
+    #ffd6ff,
+    #ffffff
+  );
+  background-size: 200% auto;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: sparkleText 4s linear infinite;
+margin-top:5px;
+margin-bottom:10px;
+}
+
+@keyframes sparkleText {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" autoplay loop>
+
+    <source src="song.mp3" type="audio/mpeg">
+
+</audio>
+
+
+
+<script>
+
+    document.addEventListener("click", function() {
+
+        document.getElementById("bgMusic").play();
+
+    });
+
+</script>
+
+<!--
+<img src="normal.jpg" id="mainPhoto" class="main-photo">
+-->
+
+<div class="stars" id="stars"></div>
+
+<!-- Side Photos -->
+
+
+
+<!-- Side Photos -->
+
+
+
+<!-- LEFT TOP -->
+
+<img src="photo1.jpg" class="side-photo" style="left:40px; top:80px;">
+
+
+
+<!-- RIGHT MIDDLE -->
+
+<img src="photo2.jpg" class="side-photo" style="right:60px; top:280px; transform: rotate(6deg);">
+
+
+
+<!-- LEFT BOTTOM -->
+
+<img src="photo4.jpg" class="side-photo" style="left:50px; bottom:80px;">
+
+<div class="card">
+  <h1>Happiest Birthday, Karthik ✨</h1>
+
+  <img src="photo.jpg" class="photo" onclick="secretMessage()">
+
+  <div class="message" id="typed"></div>
+
+  <div class="countdown" id="countdown"></div>
+
+  <button onclick="makeWish()">🎆 Make a Wish</button>
+
+  <audio id="music" src="music.mp3"></audio>
+</div>
+
+<div id="surprise" class="surprise-screen">
+    <h1>🎆 Welcome to Your 30s, Birthday King 🎆</h1>
+    <p>Your wish is sent to the universe 💫</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+// ⭐ STARS
+for (let i = 0; i < 150; i++) {
+  const star = document.createElement("div");
+  star.className = "star";
+  star.style.top = Math.random() * 100 + "%";
+  star.style.left = Math.random() * 100 + "%";
+  star.style.animationDuration = (1 + Math.random() * 3) + "s";
+  document.getElementById("stars").appendChild(star);
+}
+
+
+
+
+// 💌 TYPING EFFECT
+const text = "May success chase you, happiness hug you,coz someone as effortlessly amazing as you deserves a lifetime of beautiful moments.Universe did something right the day it created you… & I’m just quietly grateful it did.💖";
+let i = 0;
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("typed").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 35);
+  }
+}
+typeWriter();
+
+// ⏳ COUNTDOWN TO 6:00 AM
+function updateCountdown() {
+  const now = new Date();
+  const year = now.getFullYear();
+
+  // 🎂 March 1st, 6:00 AM of this year
+  let birthTime = new Date(year, 2, 1, 6, 0, 0); 
+  // Month is 0-based → 2 = March
+
+  // If March 1st already passed this year and we are after it,
+  // then prepare for next year's March 1st
+  if (now > birthTime && now.getMonth() > 2 || 
+     (now.getMonth() === 2 && now.getDate() > 1)) {
+    birthTime = new Date(year + 1, 2, 1, 6, 0, 0);
+  }
+
+  const diff = birthTime - now;
+
+  if (diff > 0) {
+    // ⏳ Before March 1st 6AM → Countdown
+    const h = Math.floor(diff / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+      "Arriving in...✨ <br><span style='font-size:2rem'>" +
+      h + "h " + m + "m " + s + "s";
+  } else {
+    // 🎉 After March 1st 6AM → Calculate age since birth moment
+    const passed = now - new Date(year, 2, 1, 6, 0, 0);
+
+    const hours = Math.floor(passed / (1000 * 60 * 60));
+    const minutes = Math.floor((passed % (1000 * 60 * 60)) / (1000 * 60));
+
+    document.getElementById("countdown").innerHTML =
+      "You are " + hours + " hrs " + minutes + " mins baby now 💖✨";
+  }
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Music
+
+function playMusic() {
+
+  document.getElementById("music").play();
+
+}
+
+
+
+// 💖 FLOATING HEARTS
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.bottom = "0px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),4000);
+},600);
+
+// 🎵 SECRET MESSAGE
+function secretMessage() {
+  alert("This page was made by someone who thinks you are dangerously special 💖");
+}
+
+// 🎆 MAKE WISH
+
+function makeWish() {
+
+  // 🎵 Optional music
+  document.getElementById("music").play();
+
+  // 🎆 Beautiful center burst explosion
+  confetti({
+    particleCount: 200,
+    spread: 120,
+    origin: { y: 0.6 }
+  });
+
+  // 🎆 Side bursts for cinematic effect
+  setTimeout(() => {
+    confetti({
+      particleCount: 120,
+      angle: 60,
+      spread: 80,
+      origin: { x: 0 }
+    });
+    confetti({
+      particleCount: 120,
+      angle: 120,
+      spread: 80,
+      origin: { x: 1 }
+    });
+  }, 300);
+
+  // 💫 Popup message
+  setTimeout(() => {
+    alert("💫 Your wish has been sent to the universe 💫");
+  }, 800);
+}
+</script>
+</body>
+</html>

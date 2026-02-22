@@ -10,14 +10,15 @@
 <style>
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background: radial-gradient(circle at top, #0f0f1a, #000);
   font-family: 'Poppins', sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
   color: white;
+  position:relative;
 }
 
 /* ⭐ STARS */
@@ -42,6 +43,7 @@ body {
   animation: fadeIn 2s ease;
   max-width: 520px;
   position: relative;
+margin:40px 20px;
 }
 @keyframes fadeIn { from {opacity:0; transform:scale(0.8);} to {opacity:1; transform:scale(1);} }
 
@@ -146,7 +148,7 @@ button:hover {
 
 .side-photo {
 
-  position: absolute;
+  position: fixed;
 
   width: 160px;
 
@@ -176,23 +178,10 @@ button:hover {
 
 }
 
-@media screen and (orientation: portrait) {
-  body {
-    transform: rotate(90deg);
-    transform-origin: center center;
-    width: 100vh;
-    height: 100vw;
-    overflow-x: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-}
-
 
 #typed {
     font-family: 'Great Vibes', cursive;   /* same as countdown */
-    font-size: 28px;
+    font-size: clamp(20px,2.5vw,28px);
     color: #ff66b2;
     text-align: center;
     line-height: 1.6;

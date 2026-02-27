@@ -326,40 +326,93 @@ typeWriter();
 
 // ⏳ COUNTDOWN TO 6:00 AM
 function updateCountdown() {
+
   const now = new Date();
+
   const year = now.getFullYear();
 
-  // 🎂 March 1st, 6:00 AM of this year
-  let birthTime = new Date(year, 2, 1, 6, 0, 0); 
-  // Month is 0-based → 2 = March
 
-  // If March 1st already passed this year and we are after it,
-  // then prepare for next year's March 1st
-  if (now > birthTime && now.getMonth() > 2 || 
-     (now.getMonth() === 2 && now.getDate() > 1)) {
-    birthTime = new Date(year + 1, 2, 1, 6, 0, 0);
-  }
 
-  const diff = birthTime - now;
+Copy
 
-  if (diff > 0) {
-    // ⏳ Before March 1st 6AM → Countdown
+Copy
+
+ const birthThisYear = new Date(year, 2, 1, 6, 0, 0);
+
+const birthNextYear = new Date(year + 1, 2, 1, 6, 0, 0);
+
+  if (now < birthThisYear) {
+
+
+
+Copy
+
+Copy
+
+    // ⏳ BEFORE birthday time → Countdown
+
+    const diff = birthThisYear - now;
+
+
+
+Copy
+
+Copy
+
     const h = Math.floor(diff / (1000 * 60 * 60));
+
     const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
     const s = Math.floor((diff % (1000 * 60)) / 1000);
 
+
+
     document.getElementById("countdown").innerHTML =
+
       "Arriving in...✨ <br><span style='font-size:2rem'>" +
+
       h + "h " + m + "m " + s + "s";
-  } else {
-    // 🎉 After March 1st 6AM → Calculate age since birth moment
-    const passed = now - new Date(year, 2, 1, 6, 0, 0);
+
+Copy
+
+Copy
+
+
+
+  } else if (now >= birthThisYear && now < birthNextYear) {
+
+
+
+    // 🎉 AFTER birthday time → Show age since 10 PM
+
+    const passed = now - birthThisYear;
+
+
 
     const hours = Math.floor(passed / (1000 * 60 * 60));
+
     const minutes = Math.floor((passed % (1000 * 60 * 60)) / (1000 * 60));
 
+
+
     document.getElementById("countdown").innerHTML =
+
       "You are " + hours + " hrs " + minutes + " mins baby now 💖✨";
+
+Copy
+
+Copy
+
+
+
+  } else {
+
+
+
+    // Safety fallback (rare case)
+
+    document.getElementById("countdown").innerHTML = "";
+
   }
 }
 setInterval(updateCountdown, 1000);
